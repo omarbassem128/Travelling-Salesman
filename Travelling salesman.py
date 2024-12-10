@@ -1,10 +1,16 @@
 def swp(s, index1, index2):
-  swapped = list(s)
-  swapped[index1], swapped[index2] = swapped[index2], swapped[index1]
-  return ''.join(swapped)
-def filter_duplicates(seq):
-    seen = set()
-    return [x for x in seq if not (x in seen or seen.add(x))]
+    swapped = list(s)
+    swapped[index1], swapped[index2] = swapped[index2], swapped[index1]
+    return ''.join(swapped)
+
+def permutations(s, i):
+    if i == len(s)-1:
+        return perms_list
+    for j in range(i, len(s)):
+        temporary = swp(s, i, j)
+        perms_list.append(temporary)
+        permutations(temporary, i+1)
+
 
 
 print("Enter number of nodes")
@@ -24,10 +30,6 @@ for i in range(num_nodes):
     print(matrix[i]) """
 path_in_numbers = [str(i) for i in range(num_nodes) if i != start_town]
 path_in_string = "".join(path_in_numbers)
-for i in range(len(path_in_string)):
-    for j in range(len(path_in_string)):
-        #swap fixedcount index with j and append the string
-        temp_string = swp(path_in_string, i, j)
-        perms_list.append(temp_string)
-#
-print(filter_duplicates(perms_list))
+permutations(path_in_string, 0)
+
+print(perms_list)
