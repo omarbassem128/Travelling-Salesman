@@ -11,8 +11,13 @@ def permutations(s, i):
         perms_list.append(temporary)
         permutations(temporary, i+1)
 
-
-
+def filter_duplicates(seq):
+    seq = list(seq)
+    seen = set()
+    for i in seq:
+        seen.add(i)
+    return list(seen)
+        
 print("Enter number of nodes")
 num_nodes = int(input())
 perms_list = []
@@ -31,5 +36,5 @@ for i in range(num_nodes):
 path_in_numbers = [str(i) for i in range(num_nodes) if i != start_town]
 path_in_string = "".join(path_in_numbers)
 permutations(path_in_string, 0)
-
-print(perms_list)
+perms_list_actual = filter_duplicates(perms_list)
+#print(perms_list_actual)
