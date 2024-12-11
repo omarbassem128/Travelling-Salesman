@@ -31,29 +31,27 @@ for i in range(num_nodes):
         print(f"Enter distance between town {i} and town {j}")
         matrix[i][j] = int(input())
         matrix[j][i] = matrix[i][j]
-""" for i in range(num_nodes):
-    print(matrix[i]) """
+# assigns all nodes to path_in_numbers list except the start/end town node
 path_in_numbers = [str(i) for i in range(num_nodes) if i != start_town]
 path_in_string = "".join(path_in_numbers)
 permutations(path_in_string, 0)
-perms_list_actual = filter_duplicates(perms_list)
-#print(perms_list_actual)
+perms_list_filtered = filter_duplicates(perms_list)
 
 temp_path_cost = 0
 minimum = 0
 chosen_string_path = ''
 
-for current_path in perms_list_actual:
+for current_path in perms_list_filtered:
     temp_path_cost = 0
     minimum = float('inf')
-    current_path = str(start_town) + current_path + str(start_town)
+    current_path = str(start_town) + current_path + str(start_town) # start/end town is added to the string
     
-    for town in range(len(current_path) - 1):
-        t1 = int(current_path[town])
-        t2 = int(current_path[town + 1])
-        temp_path_cost += matrix[t1][t2]
+    for index in range(len(current_path) - 1):
+        t1 = int(current_path[index])
+        t2 = int(current_path[index + 1])
+        temp_path_cost += matrix[t1][t2] # cost summation
     
-    if minimum > temp_path_cost:
+    if temp_path_cost < minimum :
         minimum = temp_path_cost
         chosen_string_path = current_path
 
