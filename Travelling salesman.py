@@ -6,7 +6,12 @@ class Town:
         return str(self.pos)
     
     def __repr__(self):
-        return str(self)
+        return str(self.pos)
+    
+    # __repr__ is the same as __str__,
+    # but if the object is in a tuple or list.
+    # They both convert an object for prettier printing;
+    # instead of printing addresses, they print positions.
     
     def __eq__(t1, t2):
         return t1.pos == t2.pos
@@ -42,7 +47,7 @@ def minimum_path_size(perms_list_filtered):
         temp_path_cost = 0
         minimum = float('inf')
         current_path = ((start_town,) + current_path + (start_town,))
-        # start/end town is added to the string
+        # start/end town is added to the tuple
         
         for index in range(len(current_path) - 1):
             t1 = current_path[index].pos
@@ -75,10 +80,9 @@ for i in range(num_nodes):
 
 # assigns all nodes to path_in_numbers list except the start/end town node
 path_in_numbers = [Town(i) for i in range(num_nodes) if i != start_town.pos]
+print(path_in_numbers)
 permutations(path_in_numbers, 0)
 perms_list_filtered = filter_duplicates(perms_list)
-
-print(perms_list_filtered)
 
 (string_path, path_size) = minimum_path_size(perms_list_filtered)
 print(f"The shortest path {string_path} is {path_size} long.")
