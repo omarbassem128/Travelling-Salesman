@@ -1,26 +1,29 @@
 class Town:
     def __init__(self, p):
         self.pos = p
-    
+    # __repr__ is the same as __str__,
+    # but if the object is in a tuple or list.
+    # They both convert an object for prettier printing;
+    # instead of printing addresses, they print positions.
     def __str__(self):
         return str(self.pos)
     
     def __repr__(self):
         return str(self.pos)
     
-    # __repr__ is the same as __str__,
-    # but if the object is in a tuple or list.
-    # They both convert an object for prettier printing;
-    # instead of printing addresses, they print positions.
-    
+    #__eq__ is called whenever == or != is used 
     def __eq__(t1, t2):
         return t1.pos == t2.pos
     
+    # used to create integers that uniquely identify each object. 
+    # It is called whenever the object is added to the set in filter_duplicates.
     def __hash__(self):
         return hash(self.pos)
 
 def swp(s, index1, index2):
     swapped = list(s)
+    # This is called simultaneous assignment. 
+    # It avoids the need for a 3rd variable.
     swapped[index1], swapped[index2] = swapped[index2], swapped[index1]
     return swapped
 
@@ -80,7 +83,6 @@ for i in range(num_nodes):
 
 # assigns all nodes to path_in_numbers list except the start/end town node
 path_in_numbers = [Town(i) for i in range(num_nodes) if i != start_town.pos]
-print(path_in_numbers)
 permutations(path_in_numbers, 0)
 perms_list_filtered = filter_duplicates(perms_list)
 
